@@ -79,7 +79,7 @@ class display:
             mod = d % 2
             if mod == 1:
                 self.diff += 1
-            if mod == 0:
+            if mod == 0 and self.time_limit >= 3:
                 self.time_limit -= 1
                 self.count_limit -= 1
 
