@@ -26,8 +26,8 @@ class display:
         self.table_answers = self.gen_a_table()
         self.table_display = self.gen_q_table()
 
-        self.test_q = ['1 + 1 =', '2 + 2 =', '5 + 10 =', '20 + 20 =']
-        self.test_a = [2, 4, 15, 40]
+        self.questions = ['1 + 1 =', '2 + 2 =', '5 + 10 =', '20 + 20 =']
+        self.answers = [2, 4, 15, 40]
 
     # define our clear function
     def clear(self):   
@@ -102,7 +102,7 @@ class display:
     def display_table(self):   
         # Each table cell must be 11 characters long
         self.clear()  
-        self.insert_val(self.resize_question(self.test_q[0]), self.test_a[0])
+        self.insert_val(self.resize_question(self.questions[0]), self.answers[0])
         print_table = AsciiTable(self.table_display)
         print_table.inner_row_border = True
         print(print_table.table)    
@@ -118,6 +118,6 @@ class display:
         time.sleep(self.time_limit)
         # print(before_ans, answers_correct)
         if before_ans == self.answers_correct:
-            print(f'\nCorrect Answers: {self.answers_correct}')
+            # print(f'\nCorrect Answers: {self.answers_correct}')
             os._exit(0)
             return

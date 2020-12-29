@@ -31,28 +31,28 @@ def generate_question(start, difficulty, diff_increment):
 ### ADDITION ###
 def gen_add_question(num1, num2):
     # print("add") # For testing
-    return num1, "+", num2, num1 + num2 # addend1, "+", addend2, answer
+    return f"{num1} + {num2} =", num1 + num2 # addend1, "+", addend2, answer
 
 ### SUBTRACTION ###
 def gen_sub_question(num1, num2):
     # print("sub") # For testing
     max_num = max(num1, num2)
     min_num = min(num1, num2)
-    return max_num, "-", min_num, max_num - min_num # subtrahend1, "-", subtrahend2, answer
+    return f"{max_num} - {min_num} =", max_num - min_num # subtrahend1, "-", subtrahend2, answer
 
 ### MULTIPLICATION ###
 def gen_mult_question(num1, num2):
     # print("mult") # For testing
     num1 %= 21
     num2 %= 21
-    return num1, "×", num2, num1 * num2 # multiplicand, "×", multiplier, answer
+    return f"{num1} × {num2} =", num1 * num2 # multiplicand, "×", multiplier, answer
 
 ### DIVISION ###
 def gen_div_question(num1, num2):
     #print("div") # For testing
     num1 = num1 % 20 + 1
     num2 %= 21
-    return num1 * num2, "÷", num1, num2 # dividend, "÷", divisor, answer 
+    return f"{num1 * num2} ÷ {num1} =", num2 # dividend, "÷", divisor, answer 
 
 def check_ans(ans, answers):
     return True if ans in answers else False
@@ -72,10 +72,10 @@ while True:
     print(f"difficulty: {difficulty}")
 
     answers = []
-    top_num, oper_symbol, bottom_num, answer = generate_question(START, difficulty, DIFF_INCREMENT)
+    question, answer = generate_question(START, difficulty, DIFF_INCREMENT)
     answers.append(answer)
 
-    user_ans = int(input(f"{top_num} " + oper_symbol + f" {bottom_num} = "))
+    user_ans = int(input(question))
     if check_ans(user_ans, answers):
         successes += 1
         if successes % SUCC_INCREMENT == 0:
