@@ -1,7 +1,6 @@
 import itertools
 import random
 import math
-import numpy as np
 
 ### GENERATE QUESTION ###
 def get_operation():
@@ -69,11 +68,7 @@ difficulty = 0
 while True:
     print()
     print(f"successes: {successes}")
-    print(f"successes % {SUCC_INCREMENT}: {successes % SUCC_INCREMENT}")
-
-    if successes != 0 and successes % SUCC_INCREMENT == 0:
-        difficulty += 1   
-
+    print(f"successes % {SUCC_INCREMENT}: {successes % SUCC_INCREMENT}") 
     print(f"difficulty: {difficulty}")
 
     answers = []
@@ -83,6 +78,8 @@ while True:
     user_ans = int(input(f"{top_num} " + oper_symbol + f" {bottom_num} = "))
     if check_ans(user_ans, answers):
         successes += 1
+        if successes % SUCC_INCREMENT == 0:
+            difficulty += 1
         print("yay")
     else:
         print("you succ")
