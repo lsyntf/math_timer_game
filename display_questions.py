@@ -3,15 +3,21 @@ from terminaltables import AsciiTable
 import os
 import threading
 import random
+import random_eqn
 
 class display:
-    def __init__(self, rows, cols, time):
+    def __init__(self, rows, cols, time, start, diff, diff_inc, diff_change):
         self.rows = rows
         self.cols = cols
         self.size = rows * cols
 
         self.time_limit = time
         self.count_limit = time
+
+        self.start = start
+        self.diff = diff
+        self.diff_inc = diff_inc
+        self.diff_change = diff_change
 
         self.default_question_cell = '           '
         self.default_answer_cell = -1
@@ -26,8 +32,7 @@ class display:
         self.table_answers = self.gen_a_table()
         self.table_display = self.gen_q_table()
 
-        self.questions = ['1 + 1 =', '2 + 2 =', '5 + 10 =', '20 + 20 =']
-        self.answers = [2, 4, 15, 40]
+        self.questions, self.answers = random_eqn.generate_question(self.start, self.diff, self.diff_inc)
 
     # define our clear function
     def clear(self):   
@@ -66,6 +71,18 @@ class display:
                 time.sleep(0.01)                        
                 self.count_limit -= 0.01  
 
+    def difficulty(self):
+        correct_buf = self.answers_correct
+        if correct_buf > 0 and correct_buf % self.diff_change == 0 and self.was_correct != correct_buf:
+            d = (correct_buf // self.diff_change)
+            div = d // 2
+            mod = d % 2
+            if mod == 1:
+                self.diff += 1
+            if mod == 0:
+                self.time_limit -= 1
+                self.count_limit -= 1
+
     def insert_val(self, question, answer):
         if len(self.compare_list) == 0:
             return
@@ -96,13 +113,18 @@ class display:
         self.attempts += 1
         if user_answer != '' and user_answer.isnumeric():
             self.remove_val(int(user_answer))
+        self.difficulty()
         self.display_table()
         return
 
     def display_table(self):   
         # Each table cell must be 11 characters long
+        if len(self.compare_list) == 0:
+            print("You have reached the end! You lose!")
+            os._exit(0)
         self.clear()  
-        self.insert_val(self.resize_question(self.questions[0]), self.answers[0])
+        self.questions, self.answers = random_eqn.generate_question(self.start, self.diff, self.diff_inc)
+        self.insert_val(self.resize_question(self.questions), self.answers)
         print_table = AsciiTable(self.table_display)
         print_table.inner_row_border = True
         print(print_table.table)    

@@ -52,34 +52,34 @@ def gen_div_question(num1, num2):
     #print("div") # For testing
     num1 = num1 % 20 + 1
     num2 %= 21
-    return f"{num1 * num2} ÷ {num1} =", num2 # dividend, "÷", divisor, answer 
+    return f"{num1 * num2} / {num1} =", num2 # dividend, "÷", divisor, answer 
 
 def check_ans(ans, answers):
     return True if ans in answers else False
 
 ### Main code ###
-START = 4
-SUCC_INCREMENT = 2
-DIFF_INCREMENT = 2
+# START = 4
+# SUCC_INCREMENT = 2
+# DIFF_INCREMENT = 2
 
-successes = 0
-difficulty = 0
+# successes = 0
+# difficulty = 0
 
-while True:
-    print()
-    print(f"successes: {successes}")
-    print(f"successes % {SUCC_INCREMENT}: {successes % SUCC_INCREMENT}") 
-    print(f"difficulty: {difficulty}")
+# while True:
+#     print()
+#     print(f"successes: {successes}")
+#     print(f"successes % {SUCC_INCREMENT}: {successes % SUCC_INCREMENT}") 
+#     print(f"difficulty: {difficulty}")
 
-    answers = []
-    question, answer = generate_question(START, difficulty, DIFF_INCREMENT)
-    answers.append(answer)
+#     answers = []
+#     question, answer = generate_question(START, difficulty, DIFF_INCREMENT)
+#     answers.append(answer)
 
-    user_ans = int(input(question))
-    if check_ans(user_ans, answers):
-        successes += 1
-        if successes % SUCC_INCREMENT == 0:
-            difficulty += 1
-        print("yay")
-    else:
-        print("you succ")
+#     user_ans = int(input(question))
+#     if check_ans(user_ans, answers):
+#         successes += 1
+#         if successes % SUCC_INCREMENT == 0:
+#             difficulty += 1
+#         print("yay")
+#     else:
+#         print("you succ")

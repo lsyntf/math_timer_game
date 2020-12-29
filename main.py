@@ -1,22 +1,16 @@
 # import random_eqn
 import display_questions
 import threading
+import time
 
-def difficulty(correct_ans):
-    r = 5
-    c = 5
-    t = 5
-    q = 1
-    difficulty = (correct_ans // 10) + 1
-    if difficulty == 1:
-        return [r, c, t, q]
-    div = difficulty // 4
-    mod = difficulty % 4
-    
+rows = 5
+cols = 5
+time = 5.0
+start_val = 4
+start_diff = 0
+diff_increment = 2
+diff_change = 10
 
-
-
-
-x = display_questions.display(5, 5, 5.0)
+x = display_questions.display(rows, cols, time, start_val, start_diff, diff_increment, diff_change)
 threading.Thread(target = x.display_table).start()
 
