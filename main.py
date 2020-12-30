@@ -12,8 +12,10 @@ start_val = 4
 start_diff = 0
 diff_increment = 1
 diff_change = 10
+lifeline = 1
 
-game = display_questions.display(rows, cols, time_lim, question_size, level_up_thresh, start_val, start_diff, diff_increment, diff_change)
+game = display_questions.display(rows, cols, time_lim, question_size, level_up_thresh, 
+start_val, start_diff, diff_increment, diff_change, lifeline)
 
 game.show_questions()
 game.answer_question()

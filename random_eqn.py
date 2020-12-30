@@ -13,7 +13,7 @@ def get_operation():
 
 def generate_question(start, difficulty, diff_increment):
     max_num = start + difficulty * diff_increment
-    # print(f"max_num: {max_num}")
+    print(f"max_num: {max_num}")
 
     num1 = random.randint(0, max_num)
     num2 = random.randint(0, max_num)
