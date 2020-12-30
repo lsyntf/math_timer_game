@@ -122,6 +122,9 @@ class display:
         if len(self.compare_list) == 0:
             print("You have reached the end! You lose!")
             os._exit(0)
+        if self.answers_correct == 100:
+            print("Congrats you have beat this level!")
+            return
         self.clear()  
         self.questions, self.answers = random_eqn.generate_question(self.start, self.diff, self.diff_inc)
         self.insert_val(self.resize_question(self.questions), self.answers)
@@ -131,10 +134,9 @@ class display:
         
         before_ans = self.answers_correct 
         self.was_correct = before_ans 
+        print(f"Correct Answers: {self.answers_correct} | Attempts: {self.attempts}")
         answer_q = threading.Thread(target = self.answer_question)   
         answer_q.start()
-        
-        print(f"Correct Answers: {self.answers_correct} | Attempts: {self.attempts}")
         threading.Thread(target= self.countdown).start()
 
         time.sleep(self.time_limit)
