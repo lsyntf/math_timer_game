@@ -40,9 +40,9 @@ class display:
 
         self.falling = falling
 
-        # self.insert_count = 0
-        # self.insert_times = self.time_limit / (self.diff + 1)
-        # self.insert_comparrison = 0
+        self.insert_count = 0
+        self.insert_times = self.time_limit / (self.diff + 1)
+        self.insert_comparrison = 0
 
     # define our clear function
     def clear(self):   
@@ -89,10 +89,10 @@ class display:
                     self.time_left -= 0.01                  
                     if self.is_answer_entered:
                         break                
-                # if self.insert_count // self.insert_times > self.insert_comparrison:
-                #     self.insert_comparrison += 1
-                #     self.insert_val(random_eqn.generate_question(self.start, self.diff, self.diff_inc))
-                # self.insert_count += 1
+                if self.insert_count // self.insert_times > self.insert_comparrison:
+                    self.insert_comparrison += 1
+                    self.insert_val(random_eqn.generate_question(self.start, self.diff, self.diff_inc))
+                self.insert_count += 1
             if not self.falling and before_ans == self.num_correct_ans and before_lifeline == self.lifeline and self.time_left <= 0.0:
                 # print(f'\nCorrect Answers: {self.num_correct_ans}')
                 print("\nTime's up! You lose!")
@@ -108,7 +108,7 @@ class display:
                 self.diff += 1
             elif mod == 0:
                 self.num_of_milliseconds -= 20
-            # self.insert_times = self.time_limit / (self.diff + 1)
+            self.insert_times = self.time_limit / (self.diff + 1)
             # elif mod == 0 and self.time_limit >= 3:
             #     self.time_limit -= 1
             #     self.time_left -= 1
@@ -172,8 +172,8 @@ class display:
         self.is_answer_entered = False  
         user_answer = input()
         self.is_answer_entered = True  
-        # self.insert_count = 0
-        # self.insert_comparrison = 0  
+        self.insert_count = 0
+        self.insert_comparrison = 0  
         self.attempts += 1
         if user_answer != '':
             self.remove_val(user_answer)        
